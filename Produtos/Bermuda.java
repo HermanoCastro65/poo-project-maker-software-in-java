@@ -2,11 +2,11 @@ package Produtos;
 
 import java.util.Scanner;
 
-public class Bermuda {
-    
+public class Bermuda extends Produtos {
+
     private boolean elastico;
     private String tipoCorte;
-    
+
     private Roupas roupa = new Roupas();
 
     public Bermuda() {
@@ -40,12 +40,12 @@ public class Bermuda {
     public void setRoupa(Roupas bermuda) {
         this.roupa = bermuda;
     }
-    
-    public static Bermuda createBermuda(){   
-        
+
+    public static Bermuda createBermuda() {
+
         Scanner scan = new Scanner(System.in);
-        
-        try{
+
+        try {
             Bermuda bermuda = new Bermuda();
             bermuda.roupa.setRoupa();
             System.out.println("Informe o Tipo de Corte da Bermuda: ");
@@ -53,15 +53,20 @@ public class Bermuda {
             System.out.println("Informe se a Bermuda tem Elástico: ");
             bermuda.setElastico(Boolean.parseBoolean(scan.nextLine()));
             return bermuda;
-        }catch(Exception e){
-            System.out.println("Digite uma expressão válida!");
+        } catch (Exception e) {
+            System.out.println("\nERRO: " + e + "\nDIGITE UMA EXPRESSÃO VÁLIDA!\n");
             return createBermuda();
         }
     }
-        
-    public void printBermuda(){
+
+    public void printBermuda() {
         this.roupa.printRoupa();
         System.out.println("Tipo de Corte da Bermuda: " + getTipoCorte());
         System.out.println("Elástico: " + isElastico() + "\n");
+    }
+
+    public static void print(Bermuda bermuda, int index) {
+        System.out.println(
+                "Bermuda " + (index + 1) + " Corte: " + bermuda.getTipoCorte() + " Elástico" + bermuda.isElastico());
     }
 }

@@ -2,11 +2,11 @@ package Produtos;
 
 import java.util.Scanner;
 
-public class Bone{
-    
+public class Bone extends Produtos {
+
     private boolean velcro;
     private String tipoAba;
-    
+
     private Acessorios acessorio = new Acessorios();
 
     public Bone() {
@@ -41,11 +41,11 @@ public class Bone{
         this.acessorio = bone;
     }
 
-    public static Bone createBone(){
-        
+    public static Bone createBone() {
+
         Scanner scan = new Scanner(System.in);
-        
-        try{
+
+        try {
             Bone bone = new Bone();
             bone.acessorio.setAcessorio();
             System.out.println("Informe o Tipo da Aba do Boné: ");
@@ -53,16 +53,19 @@ public class Bone{
             System.out.println("Informe se o Boné tem Velcro: ");
             bone.setVelcro(Boolean.parseBoolean(scan.nextLine()));
             return bone;
-        }catch(Exception e){
-            System.out.println("Digite uma expressão válida!");
+        } catch (Exception e) {
+            System.out.println("\nERRO: " + e + "\nDIGITE UMA EXPRESSÃO VÁLIDA!\n");
             return createBone();
         }
     }
-    
-    public void printBone(){
+
+    public void printBone() {
         this.acessorio.printAcessorio();
         System.out.println("Tipo da Aba do Boné: " + getTipoAba());
         System.out.println("Velcro: " + isVelcro() + "\n");
     }
-    
+
+    public static void print(Bone bone, int index) {
+        System.out.println("Bone " + (index + 1) + " Aba: " + bone.getTipoAba() + " Velcro" + bone.isVelcro());
+    }
 }

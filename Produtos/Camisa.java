@@ -1,12 +1,13 @@
 package Produtos;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Camisa{
-    
+public class Camisa extends Produtos {
+
     private boolean gola;
     private String tipoManga;
-            
+
     private Roupas roupa = new Roupas();
 
     public Camisa() {
@@ -40,9 +41,9 @@ public class Camisa{
     public void setRoupa(Roupas camisa) {
         this.roupa = camisa;
     }
-    
-    public static Camisa createCamisa(){   
-        try{    
+
+    public static Camisa createCamisa() {
+        try {
             Scanner scan = new Scanner(System.in);
 
             Camisa camisa = new Camisa();
@@ -52,16 +53,20 @@ public class Camisa{
             System.out.println("Informe se a Camisa tem Gola: ");
             camisa.setGola(Boolean.parseBoolean(scan.nextLine()));
             return camisa;
-        }catch(Exception e){
-            System.out.println("Digite uma expressão válida!");
+        } catch (Exception e) {
+            System.out.println("\nERRO: " + e + "\nDIGITE UMA EXPRESSÃO VÁLIDA!\n");
             return createCamisa();
         }
-    
+
     }
-    public void printCamisa(){
+
+    public void printCamisa() {
         this.roupa.printRoupa();
         System.out.println("Tipo de Manga de Camisa: " + getTipoManga());
         System.out.println("Gola: " + isGola() + "\n");
     }
-    
+
+    public static void print(Camisa camisa, int index) {
+        System.out.println("Camisa " + (index + 1) + " Manga: " + camisa.getTipoManga() + " Gola" + camisa.isGola());
+    }
 }
