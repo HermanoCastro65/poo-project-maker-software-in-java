@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Produtos {
-    
+
     private int tamanho;
     private double preco;
     private String marca;
     private String tipo;
     private String cor;
     private String codigo;
-    
+
     public ArrayList<Camisa> camisas = new ArrayList();
     public ArrayList<Bermuda> bermudas = new ArrayList();
     public ArrayList<Bone> bones = new ArrayList();
     public ArrayList<Tenis> tenis = new ArrayList();
-        
-    public Produtos(){
+
+    public Produtos() {
     }
 
     public Produtos(int tamanho, double preco, String marca, String tipo, String cor, String codigo) {
@@ -76,9 +76,9 @@ public class Produtos {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
-    public void setProduto(){
-        
+
+    public void setProduto() {
+
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Informe o Código do Produto: ");
@@ -94,8 +94,8 @@ public class Produtos {
         System.out.println("Informe o Tipo do Produto: ");
         setTipo(scan.nextLine());
     }
-    
-    public void printProduto(){
+
+    public void printProduto() {
         System.out.println("Código do Produto: " + getCodigo());
         System.out.println("Cor do Produto: " + getCor());
         System.out.println("Marca do Produto: " + getMarca());
@@ -103,10 +103,10 @@ public class Produtos {
         System.out.println("Tamanho do Produto: " + getTamanho());
         System.out.println("Tipo do Produto: " + getTipo());
     }
-    
-    public void Cadastrar(){
-        System.out.println("--------------------------------------------");          
-        System.out.println("ESCOLHA O PRODUTO");           
+
+    public void Cadastrar() {
+        System.out.println("--------------------------------------------");
+        System.out.println("ESCOLHA O PRODUTO");
         System.out.println("1 - CAMISA");
         System.out.println("2 - BERMUDA");
         System.out.println("3 - BONÉ");
@@ -115,72 +115,73 @@ public class Produtos {
 
         Scanner scan = new Scanner(System.in);
 
-        switch(Integer.parseInt(scan.nextLine())){    
-            case 1:
-                Camisa camisa = Camisa.createCamisa();
-                camisas.add(camisa);
-                break;
-            case 2:
-                Bermuda bermuda = Bermuda.createBermuda();
-                bermudas.add(bermuda);
-                break;
-            case 3:
-                Bone bone = Bone.createBone();
-                bones.add(bone);
-                break;
-            case 4:
-                Tenis tenisObj = Tenis.createTenis();
-                tenis.add(tenisObj);
-                break;
+        switch (Integer.parseInt(scan.nextLine())) {
+        case 1:
+            Camisa camisa = Camisa.createCamisa();
+            camisas.add(camisa);
+            break;
+        case 2:
+            Bermuda bermuda = Bermuda.createBermuda();
+            bermudas.add(bermuda);
+            break;
+        case 3:
+            Bone bone = Bone.createBone();
+            bones.add(bone);
+            break;
+        case 4:
+            Tenis tenisObj = Tenis.createTenis();
+            tenis.add(tenisObj);
+            break;
         }
-    } 
-    public void Print(){
-        
-        if(!camisas.isEmpty()){
+    }
+
+    public void Print() {
+
+        if (!camisas.isEmpty()) {
             System.out.println("\n--------------------------------------------\n");
             camisas.forEach((camisa) -> {
                 System.out.println("Camisa " + (camisas.lastIndexOf(camisa) + 1));
                 camisa.printCamisa();
-            });   
-        }else{
+            });
+        } else {
             System.out.println("\n--------------------------------------------\n");
             System.out.println("NENHUMA CAMISAS CADASTRADA\n");
         }
 
-        if(!bermudas.isEmpty()){
+        if (!bermudas.isEmpty()) {
             System.out.println("\n--------------------------------------------\n");
-            System.out.println("BERMUDAS CADASTRADAS:\n");   
-            bermudas.forEach((bermuda) ->{
+            System.out.println("BERMUDAS CADASTRADAS:\n");
+            bermudas.forEach((bermuda) -> {
                 System.out.println("Bermuda " + (bermudas.lastIndexOf(bermuda) + 1));
                 bermuda.printBermuda();
-            }); 
-        }else{
+            });
+        } else {
             System.out.println("\n--------------------------------------------\n");
             System.out.println("NENHUMA BERMUDA CADASTRADA\n");
         }
-    
-        if(!bones.isEmpty()){
+
+        if (!bones.isEmpty()) {
             System.out.println("\n--------------------------------------------\n");
             System.out.println("BONÉS CADASTRADOS:\n");
             bones.forEach((bone) -> {
                 System.out.println("Boné " + (bones.lastIndexOf(bone) + 1));
                 bone.printBone();
-            }); 
-        }else{
+            });
+        } else {
             System.out.println("\n--------------------------------------------\n");
             System.out.println("NENHUM BONÉ CADASTRADO\n");
         }
 
-        if(!tenis.isEmpty()){
+        if (!tenis.isEmpty()) {
             System.out.println("\n--------------------------------------------\n");
             System.out.println("TENIS CADASTRADOS:\n");
-            tenis.forEach((tenisObj) ->{
+            tenis.forEach((tenisObj) -> {
                 System.out.println("Bermuda " + (tenis.lastIndexOf(tenis) + 1));
                 tenisObj.printTenis();
-            });            
-        }else{
+            });
+        } else {
             System.out.println("\n--------------------------------------------\n");
-            System.out.println("NENHUM TENIS CADASTRADO\n");            
-        }              
+            System.out.println("NENHUM TENIS CADASTRADO\n");
+        }
     }
 }
