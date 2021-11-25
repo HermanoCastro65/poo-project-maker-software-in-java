@@ -2,8 +2,8 @@ package Produtos;
 
 import java.util.Scanner;
 
-public class Roupas extends Produtos{
-    
+public class Roupas extends Produtos {
+
     private String tecido;
     private String modelo;
 
@@ -36,11 +36,11 @@ public class Roupas extends Produtos{
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
-    
-    public void setRoupa(){
-        
+
+    public void setRoupa() {
+
         Scanner scan = new Scanner(System.in);
-        
+
         super.setProduto();
         System.out.println("Informe o Tecido da Roupa: ");
         setTecido(scan.nextLine());
@@ -48,10 +48,10 @@ public class Roupas extends Produtos{
         setModelo(scan.nextLine());
     }
 
-    public void printRoupa(){   
+    public void printRoupa() {
         super.printProduto();
         System.out.println("Tecido da Roupa: " + getTecido());
         System.out.println("Modelo da Roupa: " + getModelo());
     }
-    
+
 }

@@ -2,8 +2,8 @@ package Produtos;
 
 import java.util.Scanner;
 
-public class Acessorios extends Produtos{
-    
+public class Acessorios extends Produtos {
+
     private String material;
     private String qualidade;
 
@@ -36,22 +36,22 @@ public class Acessorios extends Produtos{
     public void setQualidade(String qualidade) {
         this.qualidade = qualidade;
     }
-    
-    public void setAcessorio(){
-        
+
+    public void setAcessorio() {
+
         Scanner scan = new Scanner(System.in);
-        
+
         super.setProduto();
         System.out.println("Informe o Material do Acessório: ");
         setMaterial(scan.nextLine());
         System.out.println("Informe a Qualidade do Acessório: ");
         setQualidade(scan.nextLine());
     }
-    
-    public void printAcessorio(){    
+
+    public void printAcessorio() {
         super.printProduto();
         System.out.println("Material do Acessório: " + getMaterial());
         System.out.println("Qualidade do Acessório: " + getQualidade());
     }
-    
+
 }
