@@ -1,6 +1,7 @@
 package Clientes_e_Fornecedores;
 
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Dados {
 
@@ -52,15 +53,19 @@ public class Dados {
 
     public void setDados() {
 
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("Informe o Nome: ");
-        setNome(scan.nextLine());
-        System.out.println("Informe o Telefone: ");
-        setTelefone(scan.nextLine());
-        System.out.println("Informe o CEP: ");
-        setCEP(scan.nextLine());
-        endereco.setEndereco();
+        try {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Informe o Nome: ");
+            setNome(scan.nextLine());
+            System.out.println("Informe o Telefone: ");
+            setTelefone(scan.nextLine());
+            System.out.println("Informe o CEP: ");
+            setCEP(scan.nextLine());
+            endereco.setEndereco();
+        } catch (Exception e) {
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
+            setDados();
+        }
     }
 
     public void printDados() {

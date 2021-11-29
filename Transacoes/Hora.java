@@ -1,6 +1,7 @@
 package Transacoes;
 
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Hora {
 
@@ -34,11 +35,15 @@ public class Hora {
     public void setHora() {
 
         Scanner scan = new Scanner(System.in);
-
-        System.out.println("Informe o Hora da Transação: ");
-        setHora(Integer.parseInt(scan.nextLine()));
-        System.out.println("Informe o Minuto da Transação: ");
-        setMinuto(Integer.parseInt(scan.nextLine()));
+        try {
+            System.out.println("Informe o Hora da Transação: ");
+            setHora(Integer.parseInt(scan.nextLine()));
+            System.out.println("Informe o Minuto da Transação: ");
+            setMinuto(Integer.parseInt(scan.nextLine()));
+        } catch (Exception e) {
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
+            setHora();
+        }
     }
 
     public void printHora() {

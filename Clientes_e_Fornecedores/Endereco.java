@@ -1,6 +1,7 @@
 package Clientes_e_Fornecedores;
 
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Endereco {
 
@@ -63,19 +64,23 @@ public class Endereco {
 
     public void setEndereco() {
 
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("Informações do Enereço:");
-        System.out.println("Informe o Estado: ");
-        setEstado(scan.nextLine());
-        System.out.println("Informe a Cidade: ");
-        setCidade(scan.nextLine());
-        System.out.println("Informe o Bairro: ");
-        setBairro(scan.nextLine());
-        System.out.println("Informe a Rua: ");
-        setRua(scan.nextLine());
-        System.out.println("Informe o Número: ");
-        setNumero(Integer.parseInt(scan.nextLine()));
+        try {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Informações do Enereço:");
+            System.out.println("Informe o Estado: ");
+            setEstado(scan.nextLine());
+            System.out.println("Informe a Cidade: ");
+            setCidade(scan.nextLine());
+            System.out.println("Informe o Bairro: ");
+            setBairro(scan.nextLine());
+            System.out.println("Informe a Rua: ");
+            setRua(scan.nextLine());
+            System.out.println("Informe o Número: ");
+            setNumero(Integer.parseInt(scan.nextLine()));
+        } catch (Exception e) {
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
+            setEndereco();
+        }
     }
 
     public void printEndereco() {

@@ -2,6 +2,7 @@ package Clientes_e_Fornecedores;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Clientes extends Dados {
 
@@ -9,7 +10,7 @@ public class Clientes extends Dados {
     private int idade;
     private double valorCompras;
 
-    public ArrayList<Clientes> clientes = new ArrayList();
+    public ArrayList<Clientes> clientes = new ArrayList<Clientes>();
 
     public Clientes() {
     }
@@ -52,11 +53,9 @@ public class Clientes extends Dados {
     }
 
     public static Clientes createCliente() {
-
         Scanner scan = new Scanner(System.in);
-
+        Clientes cliente = new Clientes();
         try {
-            Clientes cliente = new Clientes();
             cliente.setDados();
             System.out.println("Informe o CPF do Cliente: ");
             cliente.setCPF(scan.nextLine());
@@ -64,11 +63,14 @@ public class Clientes extends Dados {
             cliente.setIdade(Integer.parseInt(scan.nextLine()));
             System.out.println("Informe o Valor de Compras do Cliente: ");
             cliente.setValorCompras(Double.parseDouble(scan.nextLine()));
-            return cliente;
-        } catch (NumberFormatException e) {
-            System.out.println("\nERRO: " + e + "\nDIGITE UMA EXPRESSÃO VÁLIDA!\n");
+
+        } catch (Exception e) {
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
             return createCliente();
         }
+
+        return cliente;
+
     }
 
     public void printClientes() {
@@ -78,28 +80,35 @@ public class Clientes extends Dados {
         System.out.println("Valor de Compras do Cliente: R$ " + String.format("%,.2f", getValorCompras()));
     }
 
-    public void Cadastrar() {
+    public void cadastrar() {
         Clientes cliente = createCliente();
         clientes.add(cliente);
     }
 
-    public void Print() {
+    public void print() {
         if (!clientes.isEmpty()) {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("CLIENTES CADASTRADOS:\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(STRINGS_CADASTRADAS);
             clientes.forEach((cliente) -> {
                 System.out.println("Cliente " + (clientes.lastIndexOf(cliente) + 1));
                 cliente.printClientes();
             });
         } else {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("NENHUM ClIENTE CADASTRADO\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(NENHUMA_STRING_CADASTRADA);
         }
     }
 
-    public static void print(Clientes cliente, int index) {
-        System.out.println("Cliente " + (index + 1) + " CPF: " + cliente.getCPF() + " Idade" + cliente.getIdade()
+    public static void list(Clientes cliente, int index) {
+        System.out.println(STRING + (index + 1) + " CPF: " + cliente.getCPF() + " Idade" + cliente.getIdade()
                 + " Valor de Compras: R$ " + String.format("%,.2f", cliente.getValorCompras()));
     }
 
+    public static final String STRING = " CLIENTE ";
+    public static final String STRINGS_CADASTRADAS = "CLIENTES CADASTRADOS:\n";
+    public static final String STRING_NAO_CADASTRADA = "CLIENTE NÃO CADASTRADO\n";
+    public static final String NENHUMA_STRING_CADASTRADA = "NENHUM CLIENTE CADASTRADO\n";
+    public static final String INFORME_STRING_DA_VENDA = "\n\nInforme o Cliente da Venda:";
+    public static final String INFORME_STRING_PARA_ALTERAR = "\n\nInforme o Cliente para Alterar:";
+    public static final String INFORME_STRING_PARA_DELETAR = "\n\nInforme o Cliente para Deletar:";
 }

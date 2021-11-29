@@ -1,6 +1,7 @@
 package Produtos;
 
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Acessorios extends Produtos {
 
@@ -15,7 +16,8 @@ public class Acessorios extends Produtos {
         this.qualidade = qualidade;
     }
 
-    public Acessorios(String material, String qualidade, int tamanho, double preco, String marca, String tipo, String cor, String codigo) {
+    public Acessorios(String material, String qualidade, int tamanho, double preco, String marca, String tipo,
+            String cor, String codigo) {
         super(tamanho, preco, marca, tipo, cor, codigo);
         this.material = material;
         this.qualidade = qualidade;
@@ -38,14 +40,17 @@ public class Acessorios extends Produtos {
     }
 
     public void setAcessorio() {
-
-        Scanner scan = new Scanner(System.in);
-
-        super.setProduto();
-        System.out.println("Informe o Material do Acessório: ");
-        setMaterial(scan.nextLine());
-        System.out.println("Informe a Qualidade do Acessório: ");
-        setQualidade(scan.nextLine());
+        try {
+            Scanner scan = new Scanner(System.in);
+            super.setProduto();
+            System.out.println("Informe o Material do Acessório: ");
+            setMaterial(scan.nextLine());
+            System.out.println("Informe a Qualidade do Acessório: ");
+            setQualidade(scan.nextLine());
+        } catch (Exception e) {
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
+            setAcessorio();
+        }
     }
 
     public void printAcessorio() {

@@ -2,6 +2,7 @@ package Produtos;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Produtos {
 
@@ -12,10 +13,10 @@ public class Produtos {
     private String cor;
     private String codigo;
 
-    public ArrayList<Camisa> camisas = new ArrayList();
-    public ArrayList<Bermuda> bermudas = new ArrayList();
-    public ArrayList<Bone> bones = new ArrayList();
-    public ArrayList<Tenis> tenis = new ArrayList();
+    public ArrayList<Camisa> camisas = new ArrayList<Camisa>();
+    public ArrayList<Bermuda> bermudas = new ArrayList<Bermuda>();
+    public ArrayList<Bone> bones = new ArrayList<Bone>();
+    public ArrayList<Tenis> tenis = new ArrayList<Tenis>();
 
     public Produtos() {
     }
@@ -79,20 +80,24 @@ public class Produtos {
 
     public void setProduto() {
 
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("Informe o Código do Produto: ");
-        setCodigo(scan.nextLine());
-        System.out.println("Informe a Cor do Produto: ");
-        setCor(scan.nextLine());
-        System.out.println("Informe a Marca do Produto: ");
-        setMarca(scan.nextLine());
-        System.out.println("Informe o Preço do Produto: ");
-        setPreco(Double.parseDouble(scan.nextLine()));
-        System.out.println("Informe o Tamanho do Produto: ");
-        setTamanho(Integer.parseInt(scan.nextLine()));
-        System.out.println("Informe o Tipo do Produto: ");
-        setTipo(scan.nextLine());
+        try {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Informe o Código do Produto: ");
+            setCodigo(scan.nextLine());
+            System.out.println("Informe a Cor do Produto: ");
+            setCor(scan.nextLine());
+            System.out.println("Informe a Marca do Produto: ");
+            setMarca(scan.nextLine());
+            System.out.println("Informe o Preço do Produto: ");
+            setPreco(Double.parseDouble(scan.nextLine()));
+            System.out.println("Informe o Tamanho do Produto: ");
+            setTamanho(Integer.parseInt(scan.nextLine()));
+            System.out.println("Informe o Tipo do Produto: ");
+            setTipo(scan.nextLine());
+        } catch (Exception e) {
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
+            setProduto();
+        }
     }
 
     public void printProduto() {
@@ -105,83 +110,96 @@ public class Produtos {
     }
 
     public void Cadastrar() {
-        System.out.println("--------------------------------------------");
-        System.out.println("ESCOLHA O PRODUTO");
-        System.out.println("1 - CAMISA");
-        System.out.println("2 - BERMUDA");
-        System.out.println("3 - BONÉ");
-        System.out.println("4 - TENIS");
-        System.out.println("--------------------------------------------");
+        System.out.println(Enum.LINHA);
+        System.out.println(ESCOLHA_PRODUTO);
+        System.out.println("1 - " + Camisa.STRING);
+        System.out.println("2 - " + Bermuda.STRING);
+        System.out.println("3 - " + Bone.STRING);
+        System.out.println("4 - " + Tenis.STRING);
+        System.out.println(Enum.LINHA);
 
         Scanner scan = new Scanner(System.in);
 
-        switch (Integer.parseInt(scan.nextLine())) {
-        case 1:
-            Camisa camisa = Camisa.createCamisa();
-            camisas.add(camisa);
-            break;
-        case 2:
-            Bermuda bermuda = Bermuda.createBermuda();
-            bermudas.add(bermuda);
-            break;
-        case 3:
-            Bone bone = Bone.createBone();
-            bones.add(bone);
-            break;
-        case 4:
-            Tenis tenisObj = Tenis.createTenis();
-            tenis.add(tenisObj);
-            break;
+        try {
+            switch (Integer.parseInt(scan.nextLine())) {
+                case 1:
+                    Camisa camisa = Camisa.createCamisa();
+                    camisas.add(camisa);
+                    break;
+                case 2:
+                    Bermuda bermuda = Bermuda.createBermuda();
+                    bermudas.add(bermuda);
+                    break;
+                case 3:
+                    Bone bone = Bone.createBone();
+                    bones.add(bone);
+                    break;
+                case 4:
+                    Tenis tenisObj = Tenis.createTenis();
+                    tenis.add(tenisObj);
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
+            Cadastrar();
         }
     }
 
-    public void Print() {
+    public void print() {
 
         if (!camisas.isEmpty()) {
-            System.out.println("\n--------------------------------------------\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(Camisa.STRINGS_CADASTRADAS);
             camisas.forEach((camisa) -> {
-                System.out.println("Camisa " + (camisas.lastIndexOf(camisa) + 1));
+                System.out.println(Camisa.STRING + (camisas.lastIndexOf(camisa) + 1));
                 camisa.printCamisa();
             });
         } else {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("NENHUMA CAMISAS CADASTRADA\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(Camisa.NENHUMA_STRING_CADASTRADA);
         }
 
         if (!bermudas.isEmpty()) {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("BERMUDAS CADASTRADAS:\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(Bermuda.STRINGS_CADASTRADAS);
             bermudas.forEach((bermuda) -> {
-                System.out.println("Bermuda " + (bermudas.lastIndexOf(bermuda) + 1));
+                System.out.println(Bermuda.STRING + (bermudas.lastIndexOf(bermuda) + 1));
                 bermuda.printBermuda();
             });
         } else {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("NENHUMA BERMUDA CADASTRADA\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(Bermuda.NENHUMA_STRING_CADASTRADA);
         }
 
         if (!bones.isEmpty()) {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("BONÉS CADASTRADOS:\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(Bone.STRINGS_CADASTRADAS);
             bones.forEach((bone) -> {
-                System.out.println("Boné " + (bones.lastIndexOf(bone) + 1));
+                System.out.println(Bone.STRING + (bones.lastIndexOf(bone) + 1));
                 bone.printBone();
             });
         } else {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("NENHUM BONÉ CADASTRADO\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(Bone.NENHUMA_STRING_CADASTRADA);
         }
 
         if (!tenis.isEmpty()) {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("TENIS CADASTRADOS:\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(Tenis.STRINGS_CADASTRADAS);
             tenis.forEach((tenisObj) -> {
-                System.out.println("Bermuda " + (tenis.lastIndexOf(tenis) + 1));
+                System.out.println(Tenis.STRING + (tenis.lastIndexOf(tenisObj) + 1));
                 tenisObj.printTenis();
             });
         } else {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("NENHUM TENIS CADASTRADO\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(Tenis.NENHUMA_STRING_CADASTRADA);
         }
     }
+
+    public static final String STRING = " PRODUTO ";
+    public static final String INFORME_STRING_DA_COMPRA = "\n\nInforme o Produto da Compra:";
+    public static final String INFORME_STRING_DA_VENDA = "\n\nInforme o Produto da Venda:";
+    public static final String INFORME_STRING_DA_COMPRA_ALTERAR = "Informe o Produto da Compra para Alterar:";
+    public static final String INFORME_STRING_DA_VENDA_ALTERAR = "Informe o Produto da Venda para Alterar:";
+    public static final String ESCOLHA_PRODUTO = "ESCOLHA O PRODUTO:";
 }

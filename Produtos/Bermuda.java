@@ -1,6 +1,7 @@
 package Produtos;
 
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Bermuda extends Produtos {
 
@@ -44,7 +45,6 @@ public class Bermuda extends Produtos {
     public static Bermuda createBermuda() {
 
         Scanner scan = new Scanner(System.in);
-
         try {
             Bermuda bermuda = new Bermuda();
             bermuda.roupa.setRoupa();
@@ -54,7 +54,7 @@ public class Bermuda extends Produtos {
             bermuda.setElastico(Boolean.parseBoolean(scan.nextLine()));
             return bermuda;
         } catch (Exception e) {
-            System.out.println("\nERRO: " + e + "\nDIGITE UMA EXPRESSÃO VÁLIDA!\n");
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
             return createBermuda();
         }
     }
@@ -65,8 +65,19 @@ public class Bermuda extends Produtos {
         System.out.println("Elástico: " + isElastico() + "\n");
     }
 
-    public static void print(Bermuda bermuda, int index) {
+    public static void list(Bermuda bermuda, int index) {
         System.out.println(
                 "Bermuda " + (index + 1) + " Corte: " + bermuda.getTipoCorte() + " Elástico" + bermuda.isElastico());
     }
+
+    public static final String STRING = " BERMUDA ";
+    public static final String STRINGS_CADASTRADAS = "BERMUDAS CADASTRADAS:\n";
+    public static final String STRING_NAO_CADASTRADA = "BERMUDA NÃO CADASTRADA\n";
+    public static final String NENHUMA_STRING_CADASTRADA = "NENHUMA BERMUDA CADASTRADA\n";
+    public static final String INFORME_STRING_DA_COMPRA = "\n\nInforme a Bermuda da Compra:";
+    public static final String INFORME_STRING_DA_VENDA = "\n\nInforme a Bermuda da Venda:";
+    public static final String INFORME_STRING_PARA_ALTERAR = "\n\nInforme a Bermuda para Alterar:";
+    public static final String INFORME_STRING_DA_COMPRA_ALTERAR = "\n\nInforme a Bermuda da Compra para Alterar:";
+    public static final String INFORME_STRING_DA_VENDA_ALTERAR = "\n\nInforme a Bermuda da Venda para Alterar:";
+    public static final String INFORME_STRING_PARA_DELETAR = "\n\nInforme a Bermuda para Deletar:";
 }

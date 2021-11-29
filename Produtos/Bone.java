@@ -1,6 +1,7 @@
 package Produtos;
 
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Bone extends Produtos {
 
@@ -44,7 +45,6 @@ public class Bone extends Produtos {
     public static Bone createBone() {
 
         Scanner scan = new Scanner(System.in);
-
         try {
             Bone bone = new Bone();
             bone.acessorio.setAcessorio();
@@ -54,7 +54,7 @@ public class Bone extends Produtos {
             bone.setVelcro(Boolean.parseBoolean(scan.nextLine()));
             return bone;
         } catch (Exception e) {
-            System.out.println("\nERRO: " + e + "\nDIGITE UMA EXPRESSÃO VÁLIDA!\n");
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
             return createBone();
         }
     }
@@ -65,7 +65,18 @@ public class Bone extends Produtos {
         System.out.println("Velcro: " + isVelcro() + "\n");
     }
 
-    public static void print(Bone bone, int index) {
+    public static void list(Bone bone, int index) {
         System.out.println("Bone " + (index + 1) + " Aba: " + bone.getTipoAba() + " Velcro" + bone.isVelcro());
     }
+
+    public static final String STRING = " BONÉ ";
+    public static final String STRINGS_CADASTRADAS = "BONÉS CADASTRADOS:\n";
+    public static final String STRING_NAO_CADASTRADA = "BONÉ NÃO CADASTRADO\n";
+    public static final String NENHUMA_STRING_CADASTRADA = "NENHUM BONÉ CADASTRADO\n";
+    public static final String INFORME_STRING_DA_COMPRA = "\n\nInforme o Boné da Compra:";
+    public static final String INFORME_STRING_DA_VENDA = "\n\nInforme o Boné da Venda:";
+    public static final String INFORME_STRING_PARA_ALTERAR = "\n\nInforme o Boné para Alterar:";
+    public static final String INFORME_STRING_DA_COMPRA_ALTERAR = "\n\nInforme o Boné da Compra para Alterar:";
+    public static final String INFORME_STRING_DA_VENDA_ALTERAR = "\n\nInforme o Boné da Venda para Alterar:";
+    public static final String INFORME_STRING_PARA_DELETAR = "\n\nInforme o Boné para Deletar:";
 }

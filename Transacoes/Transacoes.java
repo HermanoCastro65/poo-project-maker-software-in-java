@@ -18,7 +18,7 @@ public abstract class Transacoes {
     public Transacoes() {
     }
 
-    public abstract void Print();
+    public abstract void print();
 
     public Data getData() {
         return data;

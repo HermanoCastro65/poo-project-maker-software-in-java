@@ -1,6 +1,7 @@
 package Transacoes;
 
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Data {
 
@@ -53,14 +54,18 @@ public class Data {
     public void setData() {
 
         Scanner scan = new Scanner(System.in);
-
-        System.out.println("Informe o Dia da Transação: ");
-        setDia(Integer.parseInt(scan.nextLine()));
-        System.out.println("Informe o Mês da Transação: ");
-        setMes(Integer.parseInt(scan.nextLine()));
-        System.out.println("Informe o Ano da Transação: ");
-        setAno(Integer.parseInt(scan.nextLine()));
-        hora.setHora();
+        try {
+            System.out.println("Informe o Dia da Transação: ");
+            setDia(Integer.parseInt(scan.nextLine()));
+            System.out.println("Informe o Mês da Transação: ");
+            setMes(Integer.parseInt(scan.nextLine()));
+            System.out.println("Informe o Ano da Transação: ");
+            setAno(Integer.parseInt(scan.nextLine()));
+            hora.setHora();
+        } catch (Exception e) {
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
+            setData();
+        }
     }
 
     public void printData() {

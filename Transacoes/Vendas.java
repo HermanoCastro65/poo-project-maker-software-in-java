@@ -3,11 +3,11 @@ package Transacoes;
 import Clientes_e_Fornecedores.Clientes;
 import java.util.ArrayList;
 import java.util.Scanner;
-import e.commerce.Metodos;
+import e.commerce.Enum;
 
 public class Vendas extends Transacoes {
 
-    ArrayList<Vendas> vendas = new ArrayList();
+    ArrayList<Vendas> vendas = new ArrayList<Vendas>();
 
     public Vendas() {
     }
@@ -24,47 +24,74 @@ public class Vendas extends Transacoes {
         System.out.println("Valor: " + getValor());
     }
 
-    public Vendas Cadastrar(String nomeProduto, ArrayList<Clientes> clientes, double precoProduto) {
+    public Vendas cadastrar(String nomeProduto, ArrayList<Clientes> clientes, double precoProduto) {
+        if (!clientes.isEmpty()) {
+            Scanner scan = new Scanner(System.in);
 
-        Scanner scan = new Scanner(System.in);
+            try {
+                Vendas transacao = new Vendas();
 
-        try {
-            Vendas transacao = new Vendas();
+                transacao.data.setData();
+                transacao.setProduto(nomeProduto);
+                System.out.println(Clientes.INFORME_STRING_DA_VENDA);
+                clientes.forEach((cliente) -> {
+                    Clientes.list(cliente, clientes.indexOf(cliente));
+                });
+                int index = Integer.parseInt(scan.nextLine());
+                System.out.println("Informe a Quantidade da Venda: ");
+                transacao.setQuantidade(Integer.parseInt(scan.nextLine()));
 
-            transacao.data.setData();
-            transacao.setProduto(nomeProduto);
-            System.out.println("Escolha o Cliente da venda: ");
-            clientes.forEach((cliente) -> {
-                Clientes.print(cliente, clientes.indexOf(cliente));
-            });
-            int index = Integer.parseInt(scan.nextLine());
-            System.out.println("Informe a Quantidade da Venda: ");
-            transacao.setQuantidade(Integer.parseInt(scan.nextLine()));
-
-            Clientes clienteEscolhido = transacao.getCliente(clientes, index);
-            transacao.setEnte(clienteEscolhido.getNome());
-            transacao.setValor(precoProduto * transacao.getQuantidade());
-
-            return transacao;
-        } catch (NumberFormatException e) {
-            System.out.println("\nERRO: " + e + "\nDIGITE UMA EXPRESSÃO VÁLIDA!\n");
-            return Cadastrar(nomeProduto, clientes, precoProduto);
+                Clientes clienteEscolhido = transacao.getCliente(clientes, index);
+                transacao.setEnte(clienteEscolhido.getNome());
+                transacao.setValor(precoProduto * transacao.getQuantidade());
+                return transacao;
+            } catch (Exception e) {
+                System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
+                return cadastrar(nomeProduto, clientes, precoProduto);
+            }
+        } else {
+            System.out.println(Enum.LINHA);
+            System.out.println(NAO_E_POSSIVEL_CADASTRAR + Clientes.NENHUMA_STRING_CADASTRADA);
+            return null;
         }
     }
 
     @Override
-    public void Print() {
+    public void print() {
 
         if (!vendas.isEmpty()) {
-            System.out.println("\n--------------------------------------------\n");
+            System.out.println(Enum.LINHA);
             vendas.forEach((venda) -> {
-                System.out.println("Compra " + (vendas.lastIndexOf(venda) + 1));
+                System.out.println(STRING + (vendas.lastIndexOf(venda) + 1));
                 venda.printVenda();
             });
         } else {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("NENHUMA COMPRA CADASTRADA\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(NENHUMA_STRING_CADASTRADA);
         }
     }
 
+    public void list() {
+        vendas.forEach((venda) -> {
+            System.out.println("Compra " + (vendas.lastIndexOf(venda) + 1) + " Ente: " + venda.getEnte() + " Produto: "
+                    + venda.getProduto() + " Quantidade: " + venda.getQuantidade() + " Total: " + venda.getValor());
+        });
+    }
+
+    public ArrayList<Vendas> getVendas() {
+        return vendas;
+    }
+
+    public int getSizeVendas() {
+        return vendas.size();
+    }
+
+    public static final String STRING = "VENDA";
+    public static final String STRING_DE = "VENDA DE";
+    public static final String STRINGS_CADASTRADAS = "VENDAS CADASTRADAS:\n";
+    public static final String STRING_NAO_CADASTRADA = "VENDA NÃO CADASTRADA\n";
+    public static final String NENHUMA_STRING_CADASTRADA = "NENHUMA VENDA CADASTRADA\n";
+    public static final String INFORME_STRING_PARA_ALTERAR = "\n\nInforme a Venda para Alterar:";
+    public static final String INFORME_STRING_PARA_DELETAR = "\n\nInforme a Venda para Deletar:";
+    public static final String NAO_E_POSSIVEL_CADASTRAR = "NÃO É POSSÍVEL CADASTRAR UMA VENDA - ";
 }

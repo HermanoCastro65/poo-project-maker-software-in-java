@@ -1,7 +1,7 @@
 package Produtos;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Camisa extends Produtos {
 
@@ -54,7 +54,7 @@ public class Camisa extends Produtos {
             camisa.setGola(Boolean.parseBoolean(scan.nextLine()));
             return camisa;
         } catch (Exception e) {
-            System.out.println("\nERRO: " + e + "\nDIGITE UMA EXPRESSÃO VÁLIDA!\n");
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
             return createCamisa();
         }
 
@@ -66,7 +66,18 @@ public class Camisa extends Produtos {
         System.out.println("Gola: " + isGola() + "\n");
     }
 
-    public static void print(Camisa camisa, int index) {
-        System.out.println("Camisa " + (index + 1) + " Manga: " + camisa.getTipoManga() + " Gola" + camisa.isGola());
+    public static void list(Camisa camisa, int index) {
+        System.out.println("Camisa " + (index + 1) + " Manga: " + camisa.getTipoManga() + " Gola: " + camisa.isGola());
     }
+
+    public static final String STRING = " CASMISA ";
+    public static final String STRINGS_CADASTRADAS = "CAMISAS CADASTRADAS:\n";
+    public static final String STRING_NAO_CADASTRADA = "CAMISA NÃO CADASTRADA\n";
+    public static final String NENHUMA_STRING_CADASTRADA = "NENHUMA CAMISA CADASTRADA\n";
+    public static final String INFORME_STRING_DA_COMPRA = "\n\nInforme a Camisa da Compra:";
+    public static final String INFORME_STRING_DA_VENDA = "\n\nInforme a Camisa da Venda:";
+    public static final String INFORME_STRING_PARA_ALTERAR = "\n\nInforme a Camisa para Alterar:";
+    public static final String INFORME_STRING_DA_COMPRA_ALTERAR = "\n\nInforme a Camisa da Compra para Alterar:";
+    public static final String INFORME_STRING_DA_VENDA_ALTERAR = "\n\nInforme a Camisa da Venda para Alterar:";
+    public static final String INFORME_STRING_PARA_DELETAR = "\n\nInforme a Camisa para Deletar:";
 }

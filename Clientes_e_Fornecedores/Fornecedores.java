@@ -2,13 +2,14 @@ package Clientes_e_Fornecedores;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import e.commerce.Enum;
 
 public class Fornecedores extends Dados {
 
     private String CNPJ;
     private double valorVendas;
 
-    public ArrayList<Fornecedores> fornecedores = new ArrayList();
+    public ArrayList<Fornecedores> fornecedores = new ArrayList<Fornecedores>();
 
     public Fornecedores() {
     }
@@ -42,9 +43,8 @@ public class Fornecedores extends Dados {
 
     public static Fornecedores createFornecedor() {
 
-        Scanner scan = new Scanner(System.in);
-
         try {
+            Scanner scan = new Scanner(System.in);
             Fornecedores fornecedor = new Fornecedores();
             fornecedor.setDados();
             System.out.println("Informe o CNPJ do Fornecedor: ");
@@ -52,8 +52,8 @@ public class Fornecedores extends Dados {
             System.out.println("Informe o Valor de Vendas do Fornecedor: ");
             fornecedor.setValorVendas(Double.parseDouble(scan.nextLine()));
             return fornecedor;
-        } catch (NumberFormatException e) {
-            System.out.println("\nERRO: " + e + "\nDIGITE UMA EXPRESSÃO VÁLIDA!\n");
+        } catch (Exception e) {
+            System.out.println(Enum.ERRO + e + Enum.DIGITE_EXPRESSAO_VALIDA);
             return createFornecedor();
         }
     }
@@ -64,27 +64,35 @@ public class Fornecedores extends Dados {
         System.out.println("Valor de Vendas do Fornecedor: R$ " + String.format("%,.2f", getValorVendas()));
     }
 
-    public void Cadastrar() {
+    public void cadastrar() {
         Fornecedores fornecedor = createFornecedor();
         fornecedores.add(fornecedor);
     }
 
-    public void Print() {
+    public void print() {
         if (!fornecedores.isEmpty()) {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("FORNECEDORES CADASTRADOS:\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(STRINGS_CADASTRADAS);
             fornecedores.forEach((fornecedor) -> {
-                System.out.println("Fornecedor " + (fornecedores.lastIndexOf(fornecedor) + 1));
+                System.out.println(STRING + (fornecedores.lastIndexOf(fornecedor) + 1));
                 fornecedor.printFornecedores();
             });
         } else {
-            System.out.println("\n--------------------------------------------\n");
-            System.out.println("NENHUM FORNECEDOR CADASTRADO\n");
+            System.out.println(Enum.LINHA);
+            System.out.println(NENHUMA_STRING_CADASTRADA);
         }
     }
 
-    public static void print(Fornecedores fornecedor, int index) {
+    public static void list(Fornecedores fornecedor, int index) {
         System.out.println("Fornecedor " + (index + 1) + " CNPJ: " + fornecedor.getCNPJ() + " Valor de Vendas: R$ "
                 + String.format("%,.2f", fornecedor.getValorVendas()));
     }
+
+    public static final String STRING = " FORNECEDOR ";
+    public static final String STRINGS_CADASTRADAS = "FORNECEDORES CADASTRADOS:\n";
+    public static final String STRING_NAO_CADASTRADA = "FORNECEDOR NÃO CADASTRADO\n";
+    public static final String NENHUMA_STRING_CADASTRADA = "NENHUM FORNECEDOR CADASTRADO\n";
+    public static final String INFORME_STRING_DA_COMPRA = "\n\nInforme o Fornecedor da Compra:";
+    public static final String INFORME_STRING_PARA_ALTERAR = "\n\nInforme o Fornecedor para Alterar:";
+    public static final String INFORME_STRING_PARA_DELETAR = "\n\nInforme o Fornecedor para Deletar:";
 }
